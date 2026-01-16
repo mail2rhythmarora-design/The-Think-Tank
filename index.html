@@ -2,22 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Think Tank - Fake News Detector</title>
+  <title>NewsVerify | Fake News Detector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h1>🧠 The Think Tank</h1>
-    <p>Fake News Detection System</p>
+  <header>
+    <h1>NewsVerify</h1>
+    <p>AI-Powered Fake News Detection System</p>
+  </header>
 
-    <textarea id="newsInput" placeholder="Paste news here..."></textarea>
-    <br><br>
-    <button id="checkBtn">Check News</button>
+  <main>
+    <section class="input-section">
+      <h2>Check Your News</h2>
+      <textarea id="newsInput" placeholder="Paste your news here..."></textarea>
+      <br>
+      <button id="checkBtn">Analyze</button>
+    </section>
 
-    <div id="result"></div>
-  </div>
+    <section class="result-section">
+      <h2>Result</h2>
+      <p id="result">Your result will appear here.</p>
+    </section>
+  </main>
 
   <script src="js/script.js"></script>
 </body>
 </html>
+
