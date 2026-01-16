@@ -3,10 +3,10 @@ const newsInput = document.getElementById("newsInput");
 const resultBox = document.getElementById("result");
 
 checkBtn.addEventListener("click", () => {
-  const newsText = newsInput.value.trim();
+  const text = newsInput.value.trim();
 
-  if (newsText === "") {
-    resultBox.innerHTML = "⚠️ Please enter some news text.";
+  if (text === "") {
+    resultBox.innerHTML = "⚠️ Please enter some news text!";
     resultBox.style.color = "orange";
     return;
   }
@@ -15,24 +15,20 @@ checkBtn.addEventListener("click", () => {
   resultBox.style.color = "white";
 
   setTimeout(() => {
-    const fakeKeywords = [
-      "shocking", "unbelievable", "click here", "miracle", 
-      "you won", "breaking", "guaranteed", "secret", "100% true"
-    ];
-
+    const fakeWords = ["shocking", "click here", "guaranteed", "secret", "breaking", "unbelievable"];
     let isFake = false;
 
-    fakeKeywords.forEach(word => {
-      if (newsText.toLowerCase().includes(word)) {
+    fakeWords.forEach(word => {
+      if (text.toLowerCase().includes(word)) {
         isFake = true;
       }
     });
 
     if (isFake) {
-      resultBox.innerHTML = "🚨 This news seems FAKE!";
+      resultBox.innerHTML = "🚨 This news looks FAKE!";
       resultBox.style.color = "red";
     } else {
-      resultBox.innerHTML = "✅ This news seems REAL.";
+      resultBox.innerHTML = "✅ This news looks REAL!";
       resultBox.style.color = "lightgreen";
     }
   }, 1500);
