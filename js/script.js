@@ -1,30 +1,32 @@
 const checkBtn = document.getElementById("checkBtn");
 const newsInput = document.getElementById("newsInput");
 const resultBox = document.getElementById("result");
+const confidenceBox = document.getElementById("confidence");
 
 checkBtn.addEventListener("click", () => {
-    const newsText = newsInput.value.toLowerCase().trim();
+    const text = newsInput.value.trim().toLowerCase();
 
-    if (newsText === "") {
-        resultBox.innerHTML = "⚠ Please enter some news text.";
+    if (text === "") {
+        resultBox.innerHTML = "⚠️ Please enter some news text.";
+        confidenceBox.innerHTML = "";
         return;
     }
 
-    const fakeKeywords = [
+    const suspiciousWords = [
         "shocking",
-        "unbelievable",
-        "click here",
-        "miracle",
         "breaking",
-        "guaranteed",
+        "miracle",
         "secret",
-        "100% true"
+        "click here",
+        "guaranteed",
+        "100% true",
+        "unbelievable"
     ];
 
     let score = 10;
 
-    fakeKeywords.forEach(word => {
-        if (newsText.includes(word)) {
+    suspiciousWords.forEach(word => {
+        if (text.includes(word)) {
             score += 15;
         }
     });
@@ -33,5 +35,13 @@ checkBtn.addEventListener("click", () => {
         score = 100;
     }
 
-    resultBox.innerHTML = "⚠ Fake probability: " + score + "%";
+    if (score >= 50) {
+        resultBox.innerHTML = "🚨 This news looks suspicious";
+        resultBox.style.color = "red";
+    } else {
+        resultBox.innerHTML = "✅ This news looks mostly genuine";
+        resultBox.style.color = "lightgreen";
+    }
+
+    confidenceBox.innerHTML = "Confidence Score: " + score + "%";
 });
