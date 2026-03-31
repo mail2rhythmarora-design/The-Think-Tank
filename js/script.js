@@ -2,7 +2,7 @@ const checkBtn = document.getElementById("checkBtn");
 const newsInput = document.getElementById("newsInput");
 const resultBox = document.getElementById("result");
 
-const API_KEY = "AIzaSyBoDCq53DkFWiibWmRqiqdEhfHwJDn9eiQ";
+const API_KEY = "Api key";
 
 checkBtn.addEventListener("click", async () => {
     const text = newsInput.value.trim();
