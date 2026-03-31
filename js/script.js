@@ -2,36 +2,48 @@ const checkBtn = document.getElementById("checkBtn");
 const newsInput = document.getElementById("newsInput");
 const resultBox = document.getElementById("result");
 
-checkBtn.addEventListener("click", () => {
-    const newsText = newsInput.value.toLowerCase().trim();
+const API_KEY = "PASTE_YOUR_API_KEY_HERE";
 
-    if (newsText === "") {
+checkBtn.addEventListener("click", async () => {
+    const text = newsInput.value.trim();
+
+    if (text === "") {
         resultBox.innerHTML = "⚠ Please enter some news text.";
         return;
     }
 
-    const fakeKeywords = [
-        "shocking",
-        "unbelievable",
-        "click here",
-        "miracle",
-        "breaking",
-        "guaranteed",
-        "secret",
-        "100% true"
-    ];
+    resultBox.innerHTML = "Analyzing with AI...";
 
-    let score = 10;   // default low fake chance
+    try {
+        const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    contents: [
+                        {
+                            parts: [
+                                {
+                                    text: `Analyze the following news and tell if it is FAKE or REAL. Also give confidence percentage:\n\n${text}`
+                                }
+                            ]
+                        }
+                    ]
+                })
+            }
+        );
 
-    fakeKeywords.forEach(word => {
-        if (newsText.includes(word)) {
-            score += 15;
-        }
-    });
+        const data = await response.json();
 
-    if (score > 100) {
-        score = 100;
+        const output = data.candidates[0].content.parts[0].text;
+
+        resultBox.innerHTML = output;
+
+    } catch (error) {
+        resultBox.innerHTML = "❌ Error connecting to AI.";
+        console.error(error);
     }
-
-    resultBox.innerHTML = "⚠ Fake probability: " + score + "%";
 });
