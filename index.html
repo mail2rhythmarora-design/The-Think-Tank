@@ -1,34 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>NewsVerify | Fake News Detector</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsVerify</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a1f44, #081730);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 52px;
+            color: #4fc3ff;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 20px;
+            font-size: 24px;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 15px 50px;
+            font-size: 24px;
+            border: none;
+            border-radius: 12px;
+            background: #4fc3ff;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        button:hover {
+            background: #36aeea;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 25px;
+            border: 2px solid #4fc3ff;
+            border-radius: 15px;
+            font-size: 28px;
+            min-height: 80px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 22px;
+            color: #ddd;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>NewsVerify</h1>
-    <p>AI-Powered Fake News Detection System</p>
-  </header>
+    <div class="container">
+        <h1>NewsVerify</h1>
+        <p class="subtitle">AI-Powered Fake News Detection System</p>
 
-  <main>
-    <section class="input-section">
-      <h2>Check Your News</h2>
-      <textarea id="newsInput" placeholder="Paste your news here..."></textarea>
-      <br>
-      <button id="checkBtn">Analyze</button>
-    </section>
+        <h2>Check Your News</h2>
 
-    <section class="result-section">
-      <h2>Result</h2>
-      <p id="result">Your result will appear here.</p>
-      <p id="confidence"></p>
-    </section>
-  </main>
+        <textarea id="newsInput" placeholder="Paste your news here..."></textarea>
 
-  <script src="js/script.js"></script>
+        <br>
+        <button onclick="analyzeNews()">Analyze</button>
+
+        <h2>Result</h2>
+        <div class="result-box" id="result">
+            Your result will appear here.
+        </div>
+
+        <div class="footer">
+            Powered by Gemini
+        </div>
+    </div>
+
+    <script>
+        function analyzeNews() {
+            let news = document.getElementById("newsInput").value;
+            let result = document.getElementById("result");
+
+            if(news.trim() === ""){
+                result.innerHTML = "Please enter news text.";
+            } else {
+                result.innerHTML = "Analyzing...";
+            }
+        }
+    </script>
+
 </body>
 </html>
-
